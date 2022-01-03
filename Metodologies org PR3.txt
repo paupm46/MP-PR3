@@ -1,0 +1,7 @@
+Classes:
+- SolLabAvid i SolLabCercaEx: - Se li podria passar el Laberint carregat i retornar la solució->(podriem fer una matriu de booleans amb true per les posicions on passa el camí)
+
+- Laberint:	- carrega de fitxer i guarda un laberint en una matriu String, guarda pos ini i pos fi, dimensions...
+
+
+- SolLabAplicacio:	- Jocs de proves: una instancia de SolLabAvid, una de SolLabCercaEx, una de Laberint i una taula de booleans per guardar la solució per fer proves
