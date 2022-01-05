@@ -78,6 +78,15 @@ public class Laberint {
 		return laberint[f][c];
 	}
 	
+	/**
+	 * Mètode que retorna el valor de la casella d'inici sense tenir en compte l'operand
+	 * @return el valor de la casella d'inici
+	 */
+	public float getValorInici() {
+		String casella = laberint[fi][ci];
+		return Character.getNumericValue(casella.charAt(1));
+	}
+	
 	public String toString() {
 		String aux = "Laberint:\n";
 		for(int i=0; i<files; i++) {
@@ -91,28 +100,40 @@ public class Laberint {
 
 	public float calcularPuntuacio (float puntsActuals, int fil, int col) {
 		float resultat = -1;
-		if (fil < laberint.length && col < laberint[0].length) {
-			String casella = laberint[fil][col];
-			char operador = casella.charAt(0);
-			int valor = Character.getNumericValue(casella.charAt(1));
-			switch (operador) {
-			case 42: // multiplicació
-				resultat = puntsActuals * valor;
-				break;
 
-			case 43: // suma
-				resultat = puntsActuals + valor;
-				break;
+		if (fil >= 0 && fil < laberint.length && col >= 0 && col < laberint[0].length) {
+			if (!(laberint[fil][col].equals("NA")) && !(laberint[fil][col].equals("0"))) {
+				String casella = laberint[fil][col];
+				char operador = casella.charAt(0);
+				int valor = Character.getNumericValue(casella.charAt(1));
+				switch (operador) {
+				case 42: // multiplicació
+					resultat = puntsActuals * valor;
+					break;
 
-			case 45: // resta
-				resultat = puntsActuals - valor;
-				break;
+				case 43: // suma
+					resultat = puntsActuals + valor;
+					break;
 
-			case 47: // divisió
-				resultat = puntsActuals / valor;
-				break;	
+				case 45: // resta
+					resultat = puntsActuals - valor;
+					break;
+
+				case 47: // divisió (el denominador mai podra ser negatiu ni 0)
+					resultat = puntsActuals / valor;
+					break;	
+				}
 			}
 		}
 		return resultat;
+	}
+
+	/**
+	 * Mètode per marca la posició passada per paràmetre com utilitzada
+	 * @param fAct
+	 * @param cAct
+	 */
+	public void marcarCasellaUtilitzada(int fAct, int cAct) {
+		laberint[fAct][cAct] = "0";
 	}
 }
