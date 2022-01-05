@@ -22,6 +22,8 @@ public class SolLabAplicacio {
 		SolLabCercaEx solCercaEx = new SolLabCercaEx(laberint);
 		solucio = solCercaEx.trobarCamiSol();*/
 		
+		//prova
+		
 		
 	}
 }
