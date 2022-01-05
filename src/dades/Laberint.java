@@ -88,5 +88,31 @@ public class Laberint {
 		}
 		return aux;
 	}
-	
+
+	public float calcularPuntuacio (float puntsActuals, int fil, int col) {
+		float resultat = -1;
+		if (fil < laberint.length && col < laberint[0].length) {
+			String casella = laberint[fil][col];
+			char operador = casella.charAt(0);
+			int valor = Character.getNumericValue(casella.charAt(1));
+			switch (operador) {
+			case 42: // multiplicació
+				resultat = puntsActuals * valor;
+				break;
+
+			case 43: // suma
+				resultat = puntsActuals + valor;
+				break;
+
+			case 45: // resta
+				resultat = puntsActuals - valor;
+				break;
+
+			case 47: // divisió
+				resultat = puntsActuals / valor;
+				break;	
+			}
+		}
+		return resultat;
+	}
 }
