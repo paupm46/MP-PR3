@@ -41,17 +41,21 @@ public class SolLabAplicacio {
 		solucionsCercaEx = solCercaEx.trobarCamiSol();
 		
 		if (solucionsCercaEx != null) {
-			System.out.println("La solució es la següent:");
-			for (int i = 0; i < solucionsCercaEx[0].length; i++) {
-				for (int j = 0; j < solucionsCercaEx[0][0].length; j++){
-					if (solucionsCercaEx[0][i][j] ==  true) {
-						System.out.print(" -> ");
-					} else {
-						System.out.print(" -- ");
+			System.out.println("Solucions possibles:");
+			for (int sol=0; sol<solucionsCercaEx.length; sol++) {
+				for (int i = 0; i < solucionsCercaEx[0].length; i++) {
+					for (int j = 0; j < solucionsCercaEx[0][0].length; j++){
+						if (solucionsCercaEx[sol][i][j] ==  true) {
+							System.out.print(" -> ");
+						} else {
+							System.out.print(" -- ");
+						}
 					}
+					System.out.println();
 				}
 				System.out.println();
 			}
+			
 			//System.out.println("Puntuació obtinguda: " + solAvid.getPuntuacio());
 		} else {
 			System.out.println("No te solució");
