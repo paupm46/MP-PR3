@@ -14,29 +14,25 @@ public class SolLabAplicacio {
 		
 		System.out.println(laberint.toString());
 		
-		boolean[][] solucio;
+		int[][] solucio;
 		boolean[][][] solucionsCercaEx;
 		
-		/*SolLabAvid solAvid = new SolLabAvid(laberint);
+		SolLabAvid solAvid = new SolLabAvid(laberint);
 		solucio = solAvid.trobarCamiSol();
 		if (solucio != null) {
 			System.out.println("La solució es la següent:");
 			for (int i = 0; i < solucio.length; i++) {
 				for (int j = 0; j < solucio[0].length; j++){
-					if (solucio[i][j] ==  true) {
-						System.out.print(" -> ");
-					} else {
-						System.out.print(" -- ");
-					}
+					System.out.print(solucio[i][j] + "\t");				
 				}
-				System.out.println();
+				System.out.print("\n\n");
 			}
 			System.out.println("Puntuació obtinguda: " + solAvid.getPuntuacio());
 		} else {
 			System.out.println("No te solució");
-		}*/
+		}
 		
-		
+		/*
 		SolLabCercaEx solCercaEx = new SolLabCercaEx(laberint);
 		solucionsCercaEx = solCercaEx.trobarCamiSol();
 		
@@ -60,6 +56,6 @@ public class SolLabAplicacio {
 		} else {
 			System.out.println("No te solució");
 		}
-		
+		*/
 	}
 }

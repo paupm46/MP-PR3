@@ -3,7 +3,7 @@ package dades;
 import java.io.*;
 import java.util.Scanner;
 
-public class Laberint {
+public class Laberint implements Cloneable {
 	private String[][] laberint;
 	private int files, columnes, fi, ci, ff, cf;
 	
@@ -99,7 +99,7 @@ public class Laberint {
 	}
 
 	public float calcularPuntuacio (float puntsActuals, int fil, int col) {
-		float resultat = -1;
+		float resultat = -puntsActuals;
 
 		if (fil >= 0 && fil < laberint.length && col >= 0 && col < laberint[0].length) {
 			if (!(laberint[fil][col].equals("NA")) && !(laberint[fil][col].equals("0"))) {
@@ -128,12 +128,13 @@ public class Laberint {
 		return resultat;
 	}
 
-	/**
-	 * Mètode per marca la posició passada per paràmetre com utilitzada
-	 * @param fAct
-	 * @param cAct
-	 */
-	public void marcarCasellaUtilitzada(int fAct, int cAct) {
-		laberint[fAct][cAct] = "0";
+	@Override
+	public Laberint clone() {
+		try {
+			return (Laberint) super.clone();
+		} catch (CloneNotSupportedException e) {
+			System.out.println("No es pot clonar");
+		}
+		return null;
 	}
 }
