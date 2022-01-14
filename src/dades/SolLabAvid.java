@@ -20,39 +20,48 @@ public class SolLabAvid {
 				solucio[f][c] = 0; // la matriu amb la solució s'inicialitza a 0
 			}
 		}
-		this.laberint = laberint.clone(); // es copia el laberint (TODO pot ser no fa falta)
-		teSolucio = false; // inicialmen s'assigna que no te solucio
+		this.laberint = laberint; // s'assigna el laberint
+		teSolucio = false; // inicialmen s'assigna que teSolucio a false
 	}
 
+	/**
+	 * Mètode que resol el laberint amb un algorisme àvid
+	 * 
+	 * @return array d'enters amb la solució o null si no s'ha trobat
+	 */
 	public int[][] trobarCamiSol() {
-		int fAct, cAct;
-		int[] casella = new int[2];
-		int comptador = 1;
-
+		
 		// assignem la columna i fila inicial
-		fAct = laberint.getFi();
-		cAct = laberint.getCi();
-		puntuacio = laberint.getValorInici(); // TODO assumim que a la primera casella no importa l'operand??
+		int fAct = laberint.getFi();
+		int cAct = laberint.getCi();
+		
+		puntuacio = laberint.calcularPuntuacio(puntuacio, fAct, cAct); // puntuació és el valor de la primera casella sense importar l'operand
+		int comptador = 1; // comptador s'inicialitza a 1 
 		solucio[fAct][cAct] = comptador; // es marca la casella inicial amb 1 a la solució
-
+		
+		int[] moviment = new int[2]; 
+		
 		while (!teSolucio && (puntuacio > 0)) {
 
-			casella = millorOpcio(laberint, fAct, cAct); // escull l'opció amb mes punts per avançar
-			if (casella != null) { // si es diferent de null pot avaçar
+			moviment = millorOpcio(laberint, fAct, cAct); // es crida a millorOpcio que escull el desplaçament cap a la millor casella per avançar
+			if (moviment != null) { // si moviment es diferent de null pot avaçar
 				// actualitza fila/columna actual
-				fAct += casella[0];
-				cAct += casella[1];
-				puntuacio = laberint.calcularPuntuacio(puntuacio, fAct, cAct); // actualitza la puntuació
-				solucio[fAct][cAct] = ++comptador; // marca la casella a la solució
+				fAct += moviment[0];
+				cAct += moviment[1];
+				// actualitza la puntuació
+				puntuacio = laberint.calcularPuntuacio(puntuacio, fAct, cAct);
+				// marca la casella a la solució
+				solucio[fAct][cAct] = ++comptador;
 				// comprova si ha arribat al final
 				if (fAct == laberint.getFf() && cAct == laberint.getCf()) {
-					teSolucio = true;
+					teSolucio = true; // si ha arribat al final s'assigna teSolucio a true
 				}
-			} else { // si casella es null no hi ha mes opcions per avançar i el mètode retorna null
-				return solucio;
+				
+			} else { // si moviment és null no hi ha més opcions per avançar i el mètode retorna null
+				return null;
 			}
 		}
-		return solucio; // si arriba al final retorna la solució
+		return solucio; // si arriba al final del laberint retorna la solució
 	}
 
 	/**
@@ -65,7 +74,7 @@ public class SolLabAvid {
 	 */
 	private int[] millorOpcio(Laberint laberint, int fil, int col) {
 		float[] puntuacions = new float[4];
-		int[] casella = new int[2];
+		int[] moviment = new int[2];
 
 		// Calcula les puntuacions que obtindria si avança cap a:
 		puntuacions[0] = laberint.calcularPuntuacio(puntuacio, fil, col - 1); // esquerra
@@ -78,40 +87,44 @@ public class SolLabAvid {
 			if (max < puntuacions[i]) { // actualitza el valor max si és troba un nou màxim i es accesible
 				switch (i) {
 				case 0:
-					if (!visitada(fil, col - 1)) { // comprova si es accesible
+					if (noVisitada(fil, col - 1)) { // comprova si es accesible
 						max = puntuacions[i];
-						casella[0] = 0;
-						casella[1] = -1;
+						// desplaçament cap a l'esquerra
+						moviment[0] = 0;
+						moviment[1] = -1;
 					}
 					break;
 				case 1:
-					if (!visitada(fil, col + 1)) { // comprova si es accesible
+					if (noVisitada(fil, col + 1)) { // comprova si es accesible
 						max = puntuacions[i];
-						casella[0] = 0;
-						casella[1] = +1;
+						// desplaçament cap a la dreta
+						moviment[0] = 0;
+						moviment[1] = +1;
 					}
 					break;
 				case 2:
-					if (!visitada(fil - 1, col)) { // comprova si es accesible
+					if (noVisitada(fil - 1, col)) { // comprova si es accesible
 						max = puntuacions[i];
-						casella[0] = -1;
-						casella[1] = 0;
+						// desplaçament cap a baix
+						moviment[0] = -1;
+						moviment[1] = 0;
 					}
 					break;
 				case 3:
-					if (!visitada(fil + 1, col)) { // comprova si es accesible
+					if (noVisitada(fil + 1, col)) { // comprova si es accesible
 						max = puntuacions[i];
-						casella[0] = +1;
-						casella[1] = 0;
+						// desplaçament cap a dalt
+						moviment[0] = +1;
+						moviment[1] = 0;
 					}
 					break;
 				}
 			}
 		}
-		if (max == -1) {
+		if (max == -puntuacio) {
 			return null; // retorna null si no pot avançar
 		}
-		return casella; // retorna la direcció cap a la casella que dona més punts
+		return moviment; // retorna la direcció cap a la casella que dona més punts
 	}
 
 	/**
@@ -121,25 +134,26 @@ public class SolLabAvid {
 	 * @param col
 	 * @return true si s'ha visitat la casella o false si no
 	 */
-	private boolean visitada(int fil, int col) {
+	private boolean noVisitada(int fil, int col) {
+		// Comprova si fil i col està dins del rang de la matriu
 		if (fil >= 0 && fil < solucio.length && col >= 0 && col < solucio[0].length) {
-			if (solucio[fil][col] > 0) {
+			if (solucio[fil][col] == 0) { // si la posició conte 0 retorna true perque no s'ha visitat
 				return true;
 			}
 		}
-		return false;
+		return false; // en qualsevol altre cas retorna false
 	}
 
 	/**
-	 * Metodè que retorna la puntuació obtinguda
+	 * Mètode que retorna la puntuació obtinguda
 	 * 
 	 * @return puntuació
 	 */
 	public float getPuntuacio() {
-		if (teSolucio) {
-			return puntuacio;
+		if (teSolucio) { // comprova si el laberint té solució
+			return puntuacio; // si té retorna la puntuació
 		}
-		return 0;
+		return 0; // si no retorna 0
 	}
 
 }
