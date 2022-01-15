@@ -10,7 +10,7 @@ public class SolLabAplicacio {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		Laberint laberint = new Laberint("exemple");
+		Laberint laberint = new Laberint("exemple5");
 		
 		System.out.println(laberint.toString());
 		
@@ -38,7 +38,7 @@ public class SolLabAplicacio {
 		
 		if (solucionsCercaEx != null) {
 			System.out.println("Solucions possibles:");
-			for (int sol=0; sol<solucionsCercaEx.length; sol++) {
+			for (int sol=0; sol<solCercaEx.getnSol(); sol++) {
 				System.out.println("Solució "+(sol+1)+":");
 				System.out.println("Puntuació obtinguda: " + solCercaEx.getPuntuacio(sol));
 				for (int i = 0; i < solucionsCercaEx[0].length; i++) {
