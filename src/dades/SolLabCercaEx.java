@@ -6,7 +6,7 @@ public class SolLabCercaEx {
 	private float[] puntuacions;
 	private int nSol;
 	private Laberint laberint;
-	private static final int NSOL = 2000;
+	private static final int NSOL = 100000;
 	//int numPos;
 	/**
 	 * Constructor SolLabCercaEx
@@ -125,7 +125,10 @@ public class SolLabCercaEx {
 	}
 	
 	public float getPuntuacio(int index) {
-		return puntuacions[index];
+		if (index<NSOL) {
+			return puntuacions[index];
+		}
+		return 0;
 	}
 
 	/**
