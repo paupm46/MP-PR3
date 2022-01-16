@@ -44,7 +44,7 @@ public class SolLabAvid {
 		while (!teSolucio && (puntuacio > 0)) {
 
 			moviment = millorOpcio(laberint, fAct, cAct); // es crida a millorOpcio que escull el desplaçament cap a la millor casella per avançar
-			if (moviment != null) { // si moviment es diferent de null pot avaçar
+			if (moviment != null) { // si moviment es diferent de null pot avançar
 				// actualitza fila/columna actual
 				fAct += moviment[0];
 				cAct += moviment[1];
@@ -56,7 +56,6 @@ public class SolLabAvid {
 				if (fAct == laberint.getFf() && cAct == laberint.getCf()) {
 					teSolucio = true; // si ha arribat al final s'assigna teSolucio a true
 				}
-				
 			} else { // si moviment és null no hi ha més opcions per avançar i el mètode retorna null
 				return null;
 			}
@@ -77,8 +76,8 @@ public class SolLabAvid {
 		int[] moviment = new int[2];
 
 		// Calcula les puntuacions que obtindria si avança cap a:
-		puntuacions[0] = laberint.calcularPuntuacio(puntuacio, fil, col - 1); // esquerra
-		puntuacions[1] = laberint.calcularPuntuacio(puntuacio, fil, col + 1); // dreta
+		puntuacions[0] = laberint.calcularPuntuacio(puntuacio, fil, col - 1); // la esquerra
+		puntuacions[1] = laberint.calcularPuntuacio(puntuacio, fil, col + 1); // la dreta
 		puntuacions[2] = laberint.calcularPuntuacio(puntuacio, fil - 1, col); // dalt
 		puntuacions[3] = laberint.calcularPuntuacio(puntuacio, fil + 1, col); // baix
 
@@ -87,7 +86,7 @@ public class SolLabAvid {
 			if (max < puntuacions[i]) { // actualitza el valor max si és troba un nou màxim i es accesible
 				switch (i) {
 				case 0:
-					if (noVisitada(fil, col - 1)) { // comprova si es accesible
+					if (noVisitada(fil, col - 1)) { // comprova si no s'ha visitat
 						max = puntuacions[i];
 						// desplaçament cap a l'esquerra
 						moviment[0] = 0;
@@ -95,7 +94,7 @@ public class SolLabAvid {
 					}
 					break;
 				case 1:
-					if (noVisitada(fil, col + 1)) { // comprova si es accesible
+					if (noVisitada(fil, col + 1)) { // comprova si no s'ha visitat
 						max = puntuacions[i];
 						// desplaçament cap a la dreta
 						moviment[0] = 0;
@@ -103,17 +102,17 @@ public class SolLabAvid {
 					}
 					break;
 				case 2:
-					if (noVisitada(fil - 1, col)) { // comprova si es accesible
+					if (noVisitada(fil - 1, col)) { // comprova si no s'ha visitat
 						max = puntuacions[i];
-						// desplaçament cap a baix
+						// desplaçament cap a dalt
 						moviment[0] = -1;
 						moviment[1] = 0;
 					}
 					break;
 				case 3:
-					if (noVisitada(fil + 1, col)) { // comprova si es accesible
+					if (noVisitada(fil + 1, col)) { // comprova si no s'ha visitat
 						max = puntuacions[i];
-						// desplaçament cap a dalt
+						// desplaçament cap a baix
 						moviment[0] = +1;
 						moviment[1] = 0;
 					}
@@ -128,11 +127,11 @@ public class SolLabAvid {
 	}
 
 	/**
-	 * Mètode per comprobar si s'ha visitat una casella
+	 * Mètode per comprobar si la casella passada per paràmetre s'ha visitat
 	 * 
-	 * @param fil
-	 * @param col
-	 * @return true si s'ha visitat la casella o false si no
+	 * @param fil - fila
+	 * @param col - columna
+	 * @return true si no s'ha visitat la casella o false si s'ha visitat o està fora de rang
 	 */
 	private boolean noVisitada(int fil, int col) {
 		// Comprova si fil i col està dins del rang de la matriu
