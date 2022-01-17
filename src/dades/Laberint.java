@@ -145,4 +145,17 @@ public class Laberint implements Cloneable {
 		}
 		return resultat;
 	}
+	
+	public String getValorCasella(int fAct, int cAct) {
+		return (laberint[fAct][cAct]);
+	}
+	
+	/**
+	 * Mètode que retorna el valor de la casella d'inici sense tenir en compte l'operand
+	 * @return el valor de la casella d'inici
+	 */
+	public float getValorInici() {
+		String casella = laberint[fi][ci];
+		return Character.getNumericValue(casella.charAt(1));
+	}
 }
