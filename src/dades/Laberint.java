@@ -3,6 +3,10 @@ package dades;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Classe Laberint 
+ * @version 1.0
+ */
 public class Laberint implements Cloneable {
 	private String[][] laberint;
 	private int files, columnes, fi, ci, ff, cf;
@@ -144,10 +148,6 @@ public class Laberint implements Cloneable {
 			}
 		}
 		return resultat;
-	}
-	
-	public String getValorCasella(int fAct, int cAct) {
-		return (laberint[fAct][cAct]);
 	}
 	
 	/**

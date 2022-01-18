@@ -1,5 +1,10 @@
 package dades;
 
+/**
+ * Classe SolLabAvid per resoldre un laberint amb un algorisme àvid
+ * @version 1.0
+ */
+
 public class SolLabAvid {
 
 	private float puntuacio;

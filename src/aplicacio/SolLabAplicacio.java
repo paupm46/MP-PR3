@@ -7,6 +7,15 @@ import dades.Laberint;
 import dades.SolLabAvid;
 import dades.SolLabCercaEx;
 
+/**
+ * Programa principal Camins en un laberint
+ * 
+ * @author Pau Piñol
+ * @author Javier Quiles
+ * @author Maria Richer
+ * @version 1.0
+ */
+
 public class SolLabAplicacio {
 	
 	static Scanner teclat = new Scanner(System.in);

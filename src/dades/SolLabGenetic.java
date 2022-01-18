@@ -178,7 +178,7 @@ public class SolLabGenetic {
 			fila = rd.nextInt(Integer.MAX_VALUE) % laberint.getFiles();
 			columna = rd.nextInt(Integer.MAX_VALUE) % laberint.getColumnes();
 			
-			if(!laberint.getValorCasella(fila, columna).equals("NA")) {
+			if(!laberint.getPos(fila, columna).equals("NA")) {
 				poblacio[cromosoma][fila][columna] = !poblacio[cromosoma][fila][columna];
 				i++;
 			}
