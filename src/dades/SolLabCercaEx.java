@@ -1,5 +1,9 @@
 package dades;
-
+/**
+ * Classe SolLabCercaEx per resoldre un laberint amb un algorisme de cerca exhaustiva
+ * @version 1.0
+ *
+ */
 public class SolLabCercaEx {
 	private int[][] solucio;
 	private int[][][] totesSol;
@@ -7,7 +11,7 @@ public class SolLabCercaEx {
 	private int nSol;
 	private Laberint laberint;
 	private static final int NSOL = 100000;
-	//int numPos;
+	
 	/**
 	 * Constructor SolLabCercaEx
 	 * @param laberint - laberint de la partida
@@ -20,9 +24,13 @@ public class SolLabCercaEx {
 			}
 		}
 		this.laberint = laberint;
-		//numPos = 0;
 	}
 	
+	/**
+	 * Mètode que resol el laberint amb un algorisme de cerca exhaustiva
+	 * 
+	 * @return array d'una taula de dues dimensions d'enters amb les solucions o null si no s'ha trobat
+	 */
 	public int[][][] trobarCamiSol () {
 		nSol = 0;
 		totesSol = new int[NSOL][laberint.getFiles()][laberint.getColumnes()];
@@ -38,42 +46,12 @@ public class SolLabCercaEx {
 		
 		solRecursiva(fAct, cAct, puntuacio, numPos);
 		
-		/*solRecursiva(fAct, cAct, puntuacio);*/
 		if (nSol == 0)
 			return null;
 		else
 			return totesSol;
 	}
-	
-	/*private boolean solRecursiva(int fAct, int cAct, float puntuacio) {
-		if (fAct==laberint.getFf() && cAct==laberint.getCf()) {
-			solucio[fAct][cAct] = true;
-			return true;
-		}
-		puntuacio = laberint.calcularPuntuacio(puntuacio, fAct, cAct);
-		if (puntuacio<=0) return false;
-		
-		laberint.marcarCasellaUtilitzada(fAct, cAct);
-		
-		if(solRecursiva(fAct-1, cAct, puntuacio)) {
-			solucio[fAct][cAct] = true;
-			return true;
-		}
-		if(solRecursiva(fAct+1, cAct, puntuacio)) {
-			solucio[fAct][cAct] = true;
-			return true;
-		}
-		if(solRecursiva(fAct, cAct-1, puntuacio)) {
-			solucio[fAct][cAct] = true;
-			return true;
-		}
-		if(solRecursiva(fAct, cAct+1, puntuacio)) {
-			solucio[fAct][cAct] = true;
-			return true;
-		}
-		return false;
-	}*/
-	
+
 	private void guardaSolActual() {
 		if(nSol<NSOL) {
 			for(int i=0; i<laberint.getFiles(); i++) {
@@ -124,6 +102,11 @@ public class SolLabCercaEx {
 		return false;
 	}
 	
+	/**
+	 * Mètode que retorna la puntuació obtinguda
+	 * 
+	 * @return puntuacio
+	 */
 	public float getPuntuacio(int index) {
 		if (index<NSOL) {
 			return puntuacions[index];
@@ -132,61 +115,22 @@ public class SolLabCercaEx {
 	}
 
 	/**
-	 * @return the nSol
+	 * Mètode que retorna el nombre de solucions
+	 * 
+	 * @return nombre de solucions
 	 */
 	public int getnSol() {
 		return nSol;
 	}
 	
+	/**
+	 * Mètode que retorna si el laberint té solució o no
+	 * 
+	 *  @return solució o no
+	 */
 	public boolean teSolucio() {
 		return nSol>0;
 	}
-	
-	/*private boolean solRecursiva(int fAct, int cAct, float puntuacio) {
-		
-		if (fAct==laberint.getFf() && cAct==laberint.getCf()) {
-			solucio[fAct][cAct] = ++numPos;
-			guardaSolActual();
-			if(nSol<NSOL) {
-				puntuacio = laberint.calcularPuntuacio(puntuacio, fAct, cAct);
-				puntuacions[nSol] = puntuacio;
-			}
-			nSol++;
-			--numPos;
-			solucio[fAct][cAct] = 0;
-			return true;
-		}
-		
-		puntuacio = laberint.calcularPuntuacio(puntuacio, fAct, cAct);
-		if (puntuacio>0) {
-			
-			if(solucio[fAct][cAct]!=0) {
-				//--numPos;
-				return false;
-			}
-				
-			
-			solucio[fAct][cAct] = ++numPos;
-			
-			solRecursiva(fAct-1, cAct, puntuacio);
-			
-			solRecursiva(fAct+1, cAct, puntuacio);
-			
-			solRecursiva(fAct, cAct-1, puntuacio);
-			
-			solRecursiva(fAct, cAct+1, puntuacio);
-			--numPos;
-		}
-		
-		if (fAct >= 0 && fAct < laberint.getFiles() && cAct >= 0 && cAct < laberint.getColumnes())
-		solucio[fAct][cAct] = 0;
-		
-		
-		
-		return false;
-	}*/
-	
-
 }
 
 

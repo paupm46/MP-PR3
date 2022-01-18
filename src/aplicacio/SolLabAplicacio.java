@@ -133,7 +133,7 @@ public class SolLabAplicacio {
 			tempsi=System.nanoTime();
 			solCercaEx.trobarCamiSol();
 			tempsf=System.nanoTime();
-			System.out.println("Algorisme cerca exhaustiva amb fitxer exemple"+i+" ha tardat "+(tempsf-tempsi)+" ns");
+			System.out.println("Algorisme cerca exhaustiva amb fitxer exemple"+i+" ha tardat "+(tempsf-tempsi)+" ns per totes les solucions i de mitjana "+(tempsf-tempsi)/solCercaEx.getnSol()+" ns/solucio");
 		}
 	}
 	
