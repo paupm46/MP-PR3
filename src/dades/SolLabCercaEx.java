@@ -127,7 +127,7 @@ public class SolLabCercaEx {
 	/**
 	 * Mètode que retorna si el laberint té solució o no
 	 * 
-	 *  @return solució o no
+	 *  @return té solució o no
 	 */
 	public boolean teSolucio() {
 		return nSol>0;

@@ -12,7 +12,7 @@ public class SolLabAvid {
 	private boolean teSolucio;
 
 	/**
-	 * Constructor Laberint
+	 * Constructor SolLabAvid
 	 * 
 	 * @param laberint - laberint de la partida
 	 */
