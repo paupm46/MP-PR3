@@ -13,51 +13,8 @@ public class SolLabAplicacio {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		/*Laberint laberint = new Laberint("exemple5");
-		
-		System.out.println(laberint.toString());
-		
-		int[][] solucio;
-		int[][][] solucionsCercaEx;*/
-		
 		int opcio;
 		boolean sortir=false;
-		
-		/*SolLabAvid solAvid = new SolLabAvid(laberint);
-		solucio = solAvid.trobarCamiSol();
-		if (solucio != null) {
-			System.out.println("La solució es la següent:");
-			for (int i = 0; i < solucio.length; i++) {
-				for (int j = 0; j < solucio[0].length; j++){
-					System.out.print(solucio[i][j] + "\t");				
-				}
-				System.out.print("\n\n");
-			}
-			System.out.println("Puntuació obtinguda: " + solAvid.getPuntuacio());
-		} else {
-			System.out.println("No te solució");
-		}*/
-		
-		
-		/*SolLabCercaEx solCercaEx = new SolLabCercaEx(laberint);
-		solucionsCercaEx = solCercaEx.trobarCamiSol();
-		System.out.println("Solucions possibles:"+solCercaEx.getnSol());
-		if (solucionsCercaEx != null) {
-			System.out.println("Solucions possibles:");
-			for (int sol=0; sol<50; sol++) {
-				System.out.println("Solució "+(sol+1)+":");
-				System.out.println("Puntuació obtinguda: " + solCercaEx.getPuntuacio(sol));
-				for (int i = 0; i < solucionsCercaEx[0].length; i++) {
-					for (int j = 0; j < solucionsCercaEx[0][0].length; j++){
-						System.out.print(solucionsCercaEx[sol][i][j] + "\t");
-					}
-					System.out.print("\n\n");
-				}
-				System.out.println();
-			}
-		} else {
-			System.out.println("No te solució");
-		}*/
 		
 		do {
 			do {
@@ -70,6 +27,7 @@ public class SolLabAplicacio {
 				mostrarSol();
 				break;
 			case 2:
+				jocDeProves();
 				break;
 			case 3:
 				testAutomaticTemps();
@@ -79,10 +37,7 @@ public class SolLabAplicacio {
 				break;
 			}
 		} while(!sortir);
-		
-		
-		
-	}
+	} 
 	
 	private static void mostraMenu() {
 		System.out.println("\nMenú:");
@@ -92,12 +47,61 @@ public class SolLabAplicacio {
 		System.out.println("4 - Sortir");
 	}
 	
+	private static void jocDeProves() throws FileNotFoundException {
+		SolLabAvid solAvid;
+		SolLabCercaEx solCercaEx;
+		Laberint laberint;
+		
+		System.out.println("Joc de proves");
+		
+		for(int num=1; num<=7; num++) {
+			laberint = new Laberint("exemple"+num);
+			System.out.println("----------");
+			System.out.println("Exemple " + num);
+			System.out.println("----------");
+			// Àvid
+			System.out.println("Àvid");
+			solAvid = new SolLabAvid(laberint);
+			int[][] solucio = solAvid.trobarCamiSol();
+			if (solucio != null) {
+				System.out.println("La solució es la següent:");
+				System.out.println("Puntuació obtinguda: " + solAvid.getPuntuacio());
+				for (int i = 0; i < solucio.length; i++) {
+					for (int j = 0; j < solucio[0].length; j++){
+						System.out.print(solucio[i][j] + "\t");				
+					}
+					System.out.print("\n\n");
+				}
+			} else {
+				System.out.println("No te solució");
+			}
+			
+			// Cerca exhaustiva
+			System.out.println("\nCerca exhaustiva");
+			solCercaEx = new SolLabCercaEx(laberint);
+			int [][][] solucionsCercaEx = solCercaEx.trobarCamiSol();
+			if (solCercaEx.teSolucio()) {
+				System.out.println("En total ha trobat " + solCercaEx.getnSol() + " solucions");
+				
+				System.out.println("La primera solució es la següent:");
+				System.out.println("Puntuació obtinguda: " + solCercaEx.getPuntuacio(0));
+				for (int i = 0; i < solucionsCercaEx[0].length; i++) {
+					for (int j = 0; j < solucionsCercaEx[0][0].length; j++){							
+						System.out.print(solucionsCercaEx[0][i][j] + "\t");
+					}
+					System.out.print("\n\n");
+				}
+				System.out.println();
+			} else {
+				System.out.println("No te solució");
+			}
+		}
+	}
+	
 	private static void testAutomaticTemps() throws FileNotFoundException {
 		SolLabAvid solAvid;
 		SolLabCercaEx solCercaEx;
 		Laberint laberint;
-		int[][] solucio;
-		int[][][] solucionsCercaEx;
 		long tempsi, tempsf;
 		
 		System.out.println("Estratègia utilitzant un algorisme àvid");
@@ -106,19 +110,19 @@ public class SolLabAplicacio {
 			laberint = new Laberint("exemple"+i);
 			solAvid = new SolLabAvid(laberint);
 			tempsi=System.nanoTime();
-			solucio = solAvid.trobarCamiSol();
+			solAvid.trobarCamiSol();
 			tempsf=System.nanoTime();
 			System.out.println("Algorisme àvid amb fitxer exemple"+i+" ha tardat "+(tempsf-tempsi)+" ns");
 		}
 		
 		
-		System.out.println("Estratègia utilitzant un algorisme de cerca exhaustiva amb ramificació i poda");
+		System.out.println("\nEstratègia utilitzant un algorisme de cerca exhaustiva amb ramificació i poda");
 		
 		for(int i=1; i<=5; i++) {
 			laberint = new Laberint("exemple"+i);
 			solCercaEx = new SolLabCercaEx(laberint);
 			tempsi=System.nanoTime();
-			solucionsCercaEx = solCercaEx.trobarCamiSol();
+			solCercaEx.trobarCamiSol();
 			tempsf=System.nanoTime();
 			System.out.println("Algorisme cerca exhaustiva amb fitxer exemple"+i+" ha tardat "+(tempsf-tempsi)+" ns");
 		}
@@ -133,9 +137,8 @@ public class SolLabAplicacio {
 			System.out.println("Quina estratègia vols utilitzar?");
 			System.out.println("1 - Algorisme àvid");
 			System.out.println("2 - Algorisme cerca exhaustiva");
-			System.out.println("3 - Algorisme genètic");
 			opcio = Integer.parseInt(teclat.nextLine());
-		}while(opcio!=1 && opcio!=2 && opcio!=3);
+		}while(opcio!=1 && opcio!=2);
 		
 		System.out.println("Introdueix el fitxer a utilitzar:");
 		fitxer = teclat.nextLine();
@@ -148,13 +151,13 @@ public class SolLabAplicacio {
 			int[][] solucio = solAvid.trobarCamiSol();
 			if (solucio != null) {
 				System.out.println("La solució es la següent:");
+				System.out.println("Puntuació obtinguda: " + solAvid.getPuntuacio());
 				for (int i = 0; i < solucio.length; i++) {
 					for (int j = 0; j < solucio[0].length; j++){
 						System.out.print(solucio[i][j] + "\t");				
 					}
 					System.out.print("\n\n");
 				}
-				System.out.println("Puntuació obtinguda: " + solAvid.getPuntuacio());
 			} else {
 				System.out.println("No te solució");
 			}

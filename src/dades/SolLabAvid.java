@@ -30,19 +30,17 @@ public class SolLabAvid {
 	 * @return array d'enters amb la solució o null si no s'ha trobat
 	 */
 	public int[][] trobarCamiSol() {
-		
 		// assignem la columna i fila inicial
 		int fAct = laberint.getFi();
 		int cAct = laberint.getCi();
 		
-		puntuacio = laberint.calcularPuntuacio(puntuacio, fAct, cAct); // puntuació és el valor de la primera casella sense importar l'operand
+		puntuacio = laberint.calcularPuntuacio(puntuacio, fAct, cAct); // puntuació és el valor de la primera casella
 		int comptador = 1; // comptador s'inicialitza a 1 
 		solucio[fAct][cAct] = comptador; // es marca la casella inicial amb 1 a la solució
 		
 		int[] moviment = new int[2]; 
 		
 		while (!teSolucio && (puntuacio > 0)) {
-
 			moviment = millorOpcio(laberint, fAct, cAct); // es crida a millorOpcio que escull el desplaçament cap a la millor casella per avançar
 			if (moviment != null) { // si moviment es diferent de null pot avançar
 				// actualitza fila/columna actual
@@ -55,12 +53,16 @@ public class SolLabAvid {
 				// comprova si ha arribat al final
 				if (fAct == laberint.getFf() && cAct == laberint.getCf()) {
 					teSolucio = true; // si ha arribat al final s'assigna teSolucio a true
-				}
+				} 
 			} else { // si moviment és null no hi ha més opcions per avançar i el mètode retorna null
 				return null;
 			}
 		}
-		return solucio; // si arriba al final del laberint retorna la solució
+		if (teSolucio) {
+			return solucio; // si arriba al final del laberint retorna la solució
+		} else { 
+			return null; // en qualsevol altre cas retorna null
+		}
 	}
 
 	/**
@@ -150,7 +152,7 @@ public class SolLabAvid {
 	 */
 	public float getPuntuacio() {
 		if (teSolucio) { // comprova si el laberint té solució
-			return puntuacio; // si té retorna la puntuació
+			return puntuacio; // si en té retorna la puntuació
 		}
 		return 0; // si no retorna 0
 	}
