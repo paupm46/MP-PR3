@@ -15,7 +15,6 @@ import dades.SolLabCercaEx;
  * @author Maria Richer
  * @version 1.0
  */
-
 public class SolLabAplicacio {
 	
 	static Scanner teclat = new Scanner(System.in);
@@ -194,15 +193,6 @@ public class SolLabAplicacio {
 			break;
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 

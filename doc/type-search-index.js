@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"dades","l":"Laberint"},{"p":"aplicacio","l":"SolLabAplicacio"},{"p":"dades","l":"SolLabAvid"},{"p":"dades","l":"SolLabCercaEx"}];updateSearchResults();

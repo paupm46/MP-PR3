@@ -46,7 +46,7 @@ public class SolLabGenetic {
 			// els millors sobreviuen sense canvis
 			copiaPercentatgeMillor();
 			
-			// creuem una part de la poblacio
+			// creuem una part de la població
 			creuarPoblacio();
 			
 			// mutem la resta
@@ -54,7 +54,7 @@ public class SolLabGenetic {
 			
 			numGeneracions++;
 			poblacio = poblacio2;
-			System.out.println("Fitness de la generaciÃ³ "+numGeneracions+":"+fitnessActual);
+			System.out.println("Fitness de la generació "+numGeneracions+":"+fitnessActual);
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class SolLabGenetic {
 				}
 			}
 			ordrePoblacio[i]=posMaxFitness;
-			// treiem el valor mÃ xim per a la propera iteraciÃ³
+			// treiem el valor màxim per a la propera iteració
 			fitnessPoblacioAux[posMaxFitness]=-1;
 		}
 		System.out.print("Ordenat per fitness:");

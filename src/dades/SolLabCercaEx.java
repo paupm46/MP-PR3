@@ -1,4 +1,5 @@
 package dades;
+
 /**
  * Classe SolLabCercaEx per resoldre un laberint amb un algorisme de cerca exhaustiva
  * @version 1.0
